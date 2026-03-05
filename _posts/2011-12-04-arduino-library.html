@@ -1,0 +1,42 @@
+---
+layout: post
+title: Arduino library
+date: 2011-12-04 18:28:06.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- C
+- Programming
+tags: []
+meta:
+  _edit_last: '9752529'
+  tagazine-media: a:7:{s:7:"primary";s:56:"http://ret2blog.files.wordpress.com/2011/12/sam_6289.jpg";s:6:"images";a:2:{s:56:"http://ret2blog.files.wordpress.com/2011/12/sam_6289.jpg";a:6:{s:8:"file_url";s:56:"http://ret2blog.files.wordpress.com/2011/12/sam_6289.jpg";s:5:"width";s:4:"3648";s:6:"height";s:4:"2736";s:4:"type";s:5:"image";s:4:"area";s:7:"9980928";s:9:"file_path";s:0:"";}s:56:"http://ret2blog.files.wordpress.com/2011/12/sam_6287.jpg";a:6:{s:8:"file_url";s:56:"http://ret2blog.files.wordpress.com/2011/12/sam_6287.jpg";s:5:"width";s:4:"3648";s:6:"height";s:4:"2736";s:4:"type";s:5:"image";s:4:"area";s:7:"9980928";s:9:"file_path";s:0:"";}}s:6:"videos";a:0:{}s:11:"image_count";s:1:"2";s:6:"author";s:7:"9752529";s:7:"blog_id";s:8:"28402112";s:9:"mod_stamp";s:19:"2011-12-04
+    18:31:09";}
+author:
+  login: n0xer
+  email: nex@autistici.org
+  display_name: n0xer
+  first_name: ''
+  last_name: ''
+permalink: "/2011/12/04/arduino-library/"
+---
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<html><body>
+<p>Hei, salve a tutti ;)</p>
+<p><a href="http://ret2blog.files.wordpress.com/2011/12/sam_6289.jpg"><img class="wp-image-53 alignright" title="Arduino" src="{{site.baseurl}}/assets/2011/12/sam_6289.jpg?w=300" alt="" width="274" height="205"></a></p>
+<p>Oggi *finalmente* mi è venuta la voglia di postare qualcosa di *serio* su Arduino ;)</p>
+<p>In questi giorni mi sono messo a sviluppare una libreria per la connessione seriale tra il pc e Arduino. Questa libreria comprende varie funzioni di base per utilizzare Arduino, per esempio scrittura e lettera digitale/analogica, ma contiene anche funzioni per interagire con la EEPROM e altro.</p>
+<p>Questa libreria l'ho scritta soprattutto per necessità perché se per natale tutto va bene, mi faccio regalare BeagleBoard e insieme ad Arduino ci farò di tutto quindi mi serviva un modo facile per fare interagire queste 2 boards ;)</p>
+<p>La libreria è scritta interamente in C, e non presenta grandi difficoltà nella comprensione del codice. Però non è del tutto completa, si possono implementare comunque altre funzioni e migliorare quella già esistenti.</p>
+<p>Un bug a me noto ma non ancora risolto è quello che ogni tanto sembra che Arduino non invii più dati sulla seriale, ciò rimane a me inspiegabile o.O basta un reset e tutto torna a funzionare. Altro problema è l'utilizzo di pinGet all'interno dei loop, che pare non funzionare correttamente probabilmente a causa dei dati e della velocità della seriale, vedrò di sistemare questo bug separando le linee di scambio dati tra input e output utilizzando le altre connessioni seriali dell'ArduinoMega ( ne ha in tutto 4 ).</p>
+<p><a href="http://ret2blog.files.wordpress.com/2011/12/sam_6287.jpg"><img class="alignleft size-medium wp-image-52" title="Arduino Test" src="{{site.baseurl}}/assets/2011/12/sam_6287.jpg?w=300" alt="" width="300" height="225"></a>  Qui a fianco l'esempio utilizzato con arduino-test.c</p>
+<p>Lasciate stare quell'ATtiny2313 che non fa parte del nostro circuito ma che   oggi ho provato a programmare on scarsissimi risultati XD</p>
+<p> </p>
+<p>Beh che dire... vi lascio con un video della libreria e di Arduino :D lo potrete vedere appena youtube me lo carica :D</p>
+<p> </p>
+<p> </p>
+<p>[youtube http://www.youtube.com/watch?v=TvWazqRiMrk&amp;w=420&amp;h=315]</p>
+<p></body></html></p>
