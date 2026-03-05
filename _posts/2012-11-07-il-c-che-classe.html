@@ -40,7 +40,7 @@ permalink: "/2012/11/07/il-c-che-classe/"
 Come sia possibile dici? Eh, roba veramente assurda...</p>
 <p>In pratica si tratta di codice automodificante che in run-time modifica una variabile all'interno di ogni funzione (facendone una copia) sostituendolo con l'indirizzo dell'istanza della classe.</p>
 <p>Forse a dirsi è più difficile che a vedersi...</p>
-<p>vector.c: <a href="http://sprunge.us/FEKd" title="vector.c">http://sprunge.us/FEKd</a></p>
+<p>vector.c: <a href="https://sprunge.us/FEKd" title="vector.c">https://sprunge.us/FEKd</a></p>
 <p>Probabilmente la parte più interessante è la 'function_copy' che serve per "copiare" una funzione in un altra area di memoria, mettendo a posto gli offset delle call in modo da non creare errori; in questo modo si possono avviare più istanze di una sola classe.</p>
 <p>Comunque questo è solo un gioco, un qualcosa di figo, non è assolutamente qualcosa di serio, anzi è sporco, brutto e fatto male, ma divertente. Mi son divertito a farlo funzionare ;)</p>
 <p>Inoltre con l'aiuto del mio amico stoke, ho finalmente concluso lo shared object injector, che ora funziona quasi a meraviglia...</p>
