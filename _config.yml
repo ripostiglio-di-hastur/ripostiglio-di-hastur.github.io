@@ -16,7 +16,7 @@ timezone:
 
 title: Ripostiglio di Hastur # the main title
 
-tagline:
+tagline: >-
 Un tranquillo blog sperduto nella rete che parla di ciò che mi piace
 
 description: >- # used by seo meta and the atom feed
