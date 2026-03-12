@@ -79,53 +79,40 @@ La roba importante avviene qui:
 Come funziona? Prendiamo spunto da CRIU, ma facciamo le cose più semplici, niente socket strani per la comunicazione, solo la classica *'int3'* che ferma il processo di copia di una regione e passa a quella successiva. That's it! Noi scriviamo i dati delle regioni in una memoria scratch e il parasite copia quella memoria dall'interno sugli indirizzi giusti. E' sicuramente una pesata senza senso, lo so. <br/>
 
 Forse, avrei potuto fare in maniera diversa e quindi mi chiedo quale sia il metodo migliore. <br/>
-Magari bastava usare un ciclo di mprotect e `process_vm_writev` senza nessun parasite, senza unmapping e senza croba strana. Chiaramente il parasite ha il pregio di poter fare più cose, e implementandolo un pochino meglio posso manipolare maggiormente il processo target, però è chiaramente più difficile. <br/>
-Ora che ci penso, potrei usare `process_vm_writev` per la funzione principale di restore...
+Magari bastava usare un ciclo di mprotect e `process_vm_writev` senza nessun parasite, senza unmapping e senza roba strana. Chiaramente il parasite ha il pregio di poter fare più cose, e implementandolo un pochino meglio posso manipolare maggiormente il processo target, però è chiaramente più difficile. <br/>
 
 ```c
-void fast_restore(pid_t pid, Region *regions, size_t count) {
+int restore_region_external(pid_t target_pid, MemoryRegion *reg, void *data_buffer) {
     struct iovec local[1];
     struct iovec remote[1];
 
-    for (size_t i = 0; i < count; i++) {
-        Region *r = &regions[i];
-
-        // --- STEP 1: RPC mprotect(target, PROT_WRITE) ---
-        // Prepariamo i registri per la syscall mprotect
-        struct user_regs_struct regs;
-        ptrace(PTRACE_GETREGS, pid, NULL, &regs);
-        
-        regs.rax = __NR_mprotect;       // SYS_mprotect
-        regs.rdi = r->start;            // addr
-        regs.rsi = r->size;             // len
-        regs.rdx = PROT_READ|PROT_WRITE;// prot
-        regs.rip = stub_addr;           // Punta allo stub "syscall; int3"
-        
-        ptrace(PTRACE_SETREGS, pid, NULL, &regs);
-        ptrace(PTRACE_CONT, pid, NULL, NULL);
-        waitpid(pid, NULL, 0); // Aspetta l'int3 dello stub
-
-        // --- STEP 2: Copia veloce con process_vm_writev ---
-        local[0].iov_base = r->data_from_disk; // Buffer nell'HOST
-        local[0].iov_len  = r->size;
-        remote[0].iov_base = (void*)r->start;  // Indirizzo nel TARGET
-        remote[0].iov_len  = r->size;
-
-        ssize_t nw = process_vm_writev(pid, local, 1, remote, 1, 0);
-        if (nw < 0) perror("process_vm_writev fallita");
-
-        // --- STEP 3: RPC mprotect(target, original_perms) ---
-        // Ripristiniamo i permessi originali (es. sola lettura o esecuzione)
-        regs.rax = __NR_mprotect;
-        regs.rdx = r->original_prot;
-        regs.rip = stub_addr; 
-        
-        ptrace(PTRACE_SETREGS, pid, NULL, &regs);
-        ptrace(PTRACE_CONT, pid, NULL, NULL);
-        waitpid(pid, NULL, 0);
-        
-        printf("Regione %zu ripristinata con successo\n", i);
+    // 1. Rendiamo la zona scrivibile (se non lo è già)
+    if (remote_mprotect(target_pid, (void*)reg->start, reg->size, PROT_READ | PROT_WRITE) < 0) {
+        fprintf(stderr, "Errore mprotect su 0x%lx\n", reg->start);
+        return -1;
     }
+
+    // 2. Prepariamo i vettori per process_vm_writev
+    local[0].iov_base = data_buffer;    // I dati caricati dal file di dump
+    local[0].iov_len  = reg->size;
+    remote[0].iov_base = (void*)reg->start; // L'indirizzo nel processo target
+    remote[0].iov_len  = reg->size;
+
+    // 3. Scrittura diretta nella memoria dell'altro processo
+    ssize_t nwrit = process_vm_writev(target_pid, local, 1, remote, 1, 0);
+
+    if (nwrit != (ssize_t)reg->size) {
+        perror("process_vm_writev");
+        return -1;
+    }
+
+    // 4. Ripristiniamo i permessi originali (es. togliamo la scrittura se era r-x)
+    if (remote_mprotect(target_pid, (void*)reg->start, reg->size, reg->prot) < 0) {
+        fprintf(stderr, "Errore ripristino permessi su 0x%lx\n", reg->start);
+        return -1;
+    }
+
+    return 0;
 }
 ```
 
