@@ -36,7 +36,7 @@ Mentre il codice di ckptmini lo trovate: [quo](https://github.com/interfector/ck
 Lo so, lo so. Qualcuno mi odierà, qualcuno dirà "ma come? la parte pià divertente è programmare!!!!1!!ONE!1!" e io sono anche d'accordo, ma sinceramente non ho più lo sbatti di fare le stronzate come facevo dieci anni fa, quando non c'avevo da pensare a nient'altro (e avevo meno hobby). <br/>
 Quindi 'vibe-coding', in che senso? Ho preso 'opencode', modello gratuito e gli ho dato in pasto il codice di catmem, istruzioni inizialmente generiche e poi sempre più precise e ho guardato cosa veniva fuori.
 
-C'è da dire che nel mezzo è passata tanta merda e tanti problemi gli ho dovuti correggere a mano, ma sono piacevolmente colpito. Un altro codice che ho dato in pasto a 'opencode' è questo [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96), uno shared object injection scritto decenni fa quando c'era ancora **"__libc_dlopen_mode"** e **dlopen** non era ancora in libc. Vabbé, integrato facile in un progetto del genere.
+C'è da dire che nel mezzo è passata tanta merda e tanti problemi gli ho dovuti correggere a mano, ma sono piacevolmente colpito. Un altro codice che ho dato in pasto a 'opencode' è uno shared object injection scritto decenni fa quando c'era ancora **"__libc_dlopen_mode"** e **dlopen** non era ancora in libc. Vabbé, integrato facile in un progetto del genere.
 
 ### Le funzioni
 
@@ -54,7 +54,7 @@ L'ultima funzione, usata magari in concomitanza con la precedente, è `resolve`,
 
 ### Loadare shared objects
 
-Qui riprendo un vecchio programma che avevo scritto quando ancora c'era **"__libc_dlopen_mode"** e che trovate [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96). In generale però l'idea è la stessa: si calcola l'indirizzo della dlopen del processo target e si chiama tramite "call" con i giusti argomenti, et voilà, shared object caricato.
+Come vi dicevo, ho ripreso un vecchio programma che avevo scritto quando ancora c'era **"__libc_dlopen_mode", il cui sorgente trovate [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96). In generale però l'idea è la stessa: si calcola l'indirizzo della dlopen del processo target e si chiama tramite "call" con i giusti argomenti, et voilà, shared object caricato.
 
 La roba importante avviene qui:
 ```c
