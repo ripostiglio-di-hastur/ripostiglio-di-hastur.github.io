@@ -78,8 +78,8 @@ La roba importante avviene qui:
 
 Come funziona? Prendiamo spunto da CRIU, ma facciamo le cose più semplici, niente socket strani per la comunicazione, solo la classica *'int3'* che ferma il processo di copia di una regione e passa a quella successiva. That's it! Noi scriviamo i dati delle regioni in una memoria scratch e il parasite copia quella memoria dall'interno sugli indirizzi giusti. E' sicuramente una pesata senza senso, lo so. <br/>
 
-Forse, avrei potuto fare in maniera diversa e quindi mi chiedo quale sia il metodo migliore. <br/>
-Magari bastava usare un ciclo di mprotect e `process_vm_writev` senza nessun parasite, senza unmapping e senza roba strana. Chiaramente il parasite ha il pregio di poter fare più cose, e implementandolo un pochino meglio posso manipolare maggiormente il processo target, però è chiaramente più difficile. <br/>
+Avrei potuto fare in maniera diversa? Non lo so... <br/>
+Magari bastava usare un ciclo di mprotect e `process_vm_writev` senza nessun parasite, senza unmapping e senza roba strana. Chiaramente il parasite ha il pregio di poter fare più cose, e implementandolo un pochino meglio posso manipolare maggiormente il processo target, però è chiaramente più difficile. L'aspetto è comunque dato da `self_unmap_jump.S`, questo ci permette di liberare le memoria mmappata e ripristinare davvero il processo con la memoria identica al checkpoint.
 
 ```c
 int restore_region_external(pid_t target_pid, MemoryRegion *reg, void *data_buffer) {
@@ -115,6 +115,8 @@ int restore_region_external(pid_t target_pid, MemoryRegion *reg, void *data_buff
     return 0;
 }
 ```
+
+Qui vediamo una versione semplificata del "restore" (non del parasite) che in generale funziona ma quelle *remote_mprotect*, quando vengono eseguite, potrebbero sporcare un pochino la memoria.
 
 ## In fin dei conti
 
