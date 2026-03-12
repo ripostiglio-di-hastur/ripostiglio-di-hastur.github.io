@@ -17,10 +17,8 @@ image:
 
 Uno pensa: "ha appena fatto un post in cui dice che ha riaperto il blog, posterà nuovi contenuti, no?" e farebbe bene, ma analizzando le ragioni, credo di aver voluto fare il post precedente in un attimo di profonda nostalgia dei tempi andati. 
 
-<br/>
 D'altra parte sono qui a scrivere un altro articolo, quindi forse non era solo nostalgia? No? Sicuri?
 
-<br/>
 Non sono come quelli che fanno articoli lunghissimi, ricercatissimi e che effettivamente spendono parte del loro tempo a fare quello. Io scrivo, così di getto, perché ho voglia di lasciare quello che penso da qualche parte: in un ripostiglio.
 
 ## Catmem V2 or CKPTMINI (Checkpoint Mini)
@@ -37,7 +35,6 @@ Mentre il codice di ckptmini lo trovate: [quo](https://github.com/interfector/ck
 
 Lo so, lo so. Qualcuno mi odierà, qualcuno dirà "ma come? la parte pià divertente è programmare!!!!1!!ONE!1!" e io sono anche d'accordo, ma sinceramente non ho più lo sbatti di fare le stronzate come facevo dieci anni fa, quando non c'avevo da pensare a nient'altro (e avevo meno hobby). <br/>
 Quindi 'vibe-coding', in che senso? Ho preso 'opencode', modello gratuito e gli ho dato in pasto il codice di catmem, istruzioni inizialmente generiche e poi sempre più precise e ho guardato cosa veniva fuori.
-<br/><br/>
 
 C'è da dire che nel mezzo è passata tanta merda e tanti problemi gli ho dovuti correggere a mano, ma sono piacevolmente colpito. Un altro codice che ho dato in pasto a 'opencode' è questo [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96), uno shared object injection scritto decenni fa quando c'era ancora **"__libc_dlopen_mode"** e **dlopen** non era ancora in libc. Vabbé, integrato [[Loadare shared objects|facile]] in un progetto del genere.
 
@@ -59,13 +56,78 @@ L'ultima funzione, usata magari in concomitanza con la precedente, è `resolve`,
 
 Qui riprendo un vecchio programma che avevo scritto quando ancora c'era **"__libc_dlopen_mode"** e che trovate [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96). In generale però l'idea è la stessa: si calcola l'indirizzo della dlopen del processo target e si chiama tramite "call" con i giusti argomenti, et voilà, shared object caricato.
 
+La roba importante avviene qui:
+```c
+    void *local_dlopen = dlsym(RTLD_DEFAULT, "dlopen"); // Ci serve la dlopen locale
+
+    uint64_t dlopen_offset = (uint64_t)local_dlopen - local_libc; // Ci calcoliamo l'offset locale
+    uint64_t remote_dlopen = remote_libc + dlopen_offset; // Lo usiamo per calcolare l'address remoto
+
+    uint64_t path_addr = cmd_upload(pid, so_path, path_len, PROT_READ); // Carichiamo la path dello shared object
+
+    char arg0[32], arg1[32];
+    snprintf(arg0, sizeof(arg0), "0x%lx", path_addr);
+    snprintf(arg1, sizeof(arg1), "0x102");
+    char *dlopen_argv[] = { arg0, arg1 };
+    uint64_t dlopen_result = 0;
+
+    cmd_call_ret(pid, remote_dlopen, 2, dlopen_argv, false, &dlopen_result); // Chiamiamo 'dlopen'
+```
+
 ### Parasite load
 
-Come funziona? Prendiamo spunto da CRIU, ma facciamo le cose più semplici, niente socket strani per la comunicazione, solo la classica *'int3'* che ferma il processo di copia di una regione e passa a quella successiva. That's it! Noi scriviamo i dati delle regioni in una memoria scratch e il parasite copia quella memoria dall'interno sugli indirizzi giusti. E' sicuramente una pesata senza senso, lo so. <br/><br/>
+Come funziona? Prendiamo spunto da CRIU, ma facciamo le cose più semplici, niente socket strani per la comunicazione, solo la classica *'int3'* che ferma il processo di copia di una regione e passa a quella successiva. That's it! Noi scriviamo i dati delle regioni in una memoria scratch e il parasite copia quella memoria dall'interno sugli indirizzi giusti. E' sicuramente una pesata senza senso, lo so. <br/>
 
 Forse, avrei potuto fare in maniera diversa e quindi mi chiedo quale sia il metodo migliore. <br/>
 Magari bastava usare un ciclo di mprotect e `process_vm_writev` senza nessun parasite, senza unmapping e senza croba strana. Chiaramente il parasite ha il pregio di poter fare più cose, e implementandolo un pochino meglio posso manipolare maggiormente il processo target, però è chiaramente più difficile. <br/>
 Ora che ci penso, potrei usare `process_vm_writev` per la funzione principale di restore...
+
+```c
+void fast_restore(pid_t pid, Region *regions, size_t count) {
+    struct iovec local[1];
+    struct iovec remote[1];
+
+    for (size_t i = 0; i < count; i++) {
+        Region *r = &regions[i];
+
+        // --- STEP 1: RPC mprotect(target, PROT_WRITE) ---
+        // Prepariamo i registri per la syscall mprotect
+        struct user_regs_struct regs;
+        ptrace(PTRACE_GETREGS, pid, NULL, &regs);
+        
+        regs.rax = __NR_mprotect;       // SYS_mprotect
+        regs.rdi = r->start;            // addr
+        regs.rsi = r->size;             // len
+        regs.rdx = PROT_READ|PROT_WRITE;// prot
+        regs.rip = stub_addr;           // Punta allo stub "syscall; int3"
+        
+        ptrace(PTRACE_SETREGS, pid, NULL, &regs);
+        ptrace(PTRACE_CONT, pid, NULL, NULL);
+        waitpid(pid, NULL, 0); // Aspetta l'int3 dello stub
+
+        // --- STEP 2: Copia veloce con process_vm_writev ---
+        local[0].iov_base = r->data_from_disk; // Buffer nell'HOST
+        local[0].iov_len  = r->size;
+        remote[0].iov_base = (void*)r->start;  // Indirizzo nel TARGET
+        remote[0].iov_len  = r->size;
+
+        ssize_t nw = process_vm_writev(pid, local, 1, remote, 1, 0);
+        if (nw < 0) perror("process_vm_writev fallita");
+
+        // --- STEP 3: RPC mprotect(target, original_perms) ---
+        // Ripristiniamo i permessi originali (es. sola lettura o esecuzione)
+        regs.rax = __NR_mprotect;
+        regs.rdx = r->original_prot;
+        regs.rip = stub_addr; 
+        
+        ptrace(PTRACE_SETREGS, pid, NULL, &regs);
+        ptrace(PTRACE_CONT, pid, NULL, NULL);
+        waitpid(pid, NULL, 0);
+        
+        printf("Regione %zu ripristinata con successo\n", i);
+    }
+}
+```
 
 ## In fin dei conti
 
