@@ -54,7 +54,7 @@ L'ultima funzione, usata magari in concomitanza con la precedente, è `resolve`,
 
 ### Loadare shared objects
 
-Come vi dicevo, ho ripreso un vecchio programma che avevo scritto quando ancora c'era **"__libc_dlopen_mode", il cui sorgente trovate [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96). In generale però l'idea è la stessa: si calcola l'indirizzo della dlopen del processo target e si chiama tramite "call" con i giusti argomenti, et voilà, shared object caricato.
+Come vi dicevo, ho ripreso un vecchio programma che avevo scritto quando ancora c'era **"__libc_dlopen_mode"**, il cui sorgente trovate [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96). In generale però l'idea è la stessa: si calcola l'indirizzo della dlopen del processo target e si chiama tramite "call" con i giusti argomenti, et voilà, shared object caricato.
 
 La roba importante avviene qui:
 ```c
