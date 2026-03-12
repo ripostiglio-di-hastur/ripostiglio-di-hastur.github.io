@@ -39,7 +39,7 @@ Lo so, lo so. Qualcuno mi odierà, qualcuno dirà "ma come? la parte pià divert
 Quindi 'vibe-coding', in che senso? Ho preso 'opencode', modello gratuito e gli ho dato in pasto il codice di catmem, istruzioni inizialmente generiche e poi sempre più precise e ho guardato cosa veniva fuori.
 <br/><br/>
 
-C'è da dire che nel mezzo è passata tanta merda e tanti problemi gli ho dovuti correggere a mano, ma sono piacevolmente colpito. Un altro codice che ho dato in pasto a 'opencode' è questo [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96), uno shared object injection scritto decenni fa quando c'era ancora **"__libc_dlopen_mode"** e **dlopen** non era ancora in libc. Vabbé, integrato [facile](#Loadare_shared_objects) in un progetto del genere.
+C'è da dire che nel mezzo è passata tanta merda e tanti problemi gli ho dovuti correggere a mano, ma sono piacevolmente colpito. Un altro codice che ho dato in pasto a 'opencode' è questo [qui](https://gist.github.com/interfector/0fd830ea799b2f5f7c96), uno shared object injection scritto decenni fa quando c'era ancora **"__libc_dlopen_mode"** e **dlopen** non era ancora in libc. Vabbé, integrato [[Loadare shared objects|facile]] in un progetto del genere.
 
 ### Le funzioni
 
