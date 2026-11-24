@@ -2,10 +2,9 @@
 title: Rispolverare vecchi codici
 description: Ho preso in mano roba vecchia e l'ho rispolverata
 author: nex
-date: 2026-03-11 11:33:00 +0800
+date: 2026-03-11 11:33:00 +0100
 categories: [Programming]
 tags: [c,hacks,ai]
-pin: true
 math: true
 mermaid: true
 image:
