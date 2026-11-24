@@ -9,6 +9,11 @@ on:
       - README.md
       - LICENSE
 
+  # Build and test only, no deploy
+  pull_request:
+    branches:
+      - main
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -19,7 +24,8 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  # PR builds must not cancel a running deploy
+  group: "pages-${{ github.event_name == 'pull_request' && github.ref || 'deploy' }}"
   cancel-in-progress: true
 
 jobs:
@@ -57,11 +63,13 @@ jobs:
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
       - name: Upload site artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
