@@ -5,18 +5,17 @@ author: nex
 date: 2015-01-27 11:33:00 +0100
 categories: [Blogging]
 tags: [casual]
-math: true
-mermaid: true
 image:
   path: /assets/2015/badfeeling.jpg
   alt: Due Teensy che si fanno compagnia.
 ---
 
-<html><body></p>
-<p>Un "bad feeling" in realtà su come sta andando tutto ahah :)</p>
-<p>Comunque sono stato al Lucca Comics ed è stato tutto fiquo assai. Che dire, quest'anno è stato un vero casino. Sono andato il Sabato e non vi dico quanta gente c'era, cioè ho fatto fila solo per uscire dalle mura... USCIRE!!! Per non parlare di quella del treno per il ritorno AHAH (quella dell'andata è stata simpatica considerato che hanno cambiato il binario a Pisa e c'era marea di gente a corsa per prendere il treno LOL)</p>
-<p>Vabbè via... con IOIO sto aggeggiando ed ho intenzione di fare una miniatura di un Dalek... per ora mi sto organizzando con servomotori e ora parla anche!!</p>
-<p>Mi sono ordinato anche Teensy 2.0 e il 3.1 per fare un po' di test con l'USB e per fare una cosa simile alla Rubber Ducky :D</p>
-<p>Che dire ancora... mi sono cimentato nel progetto (in C++ ... incredibbbile) di un simulatore di Magic... ma non so per quanto ancora potrò continuarlo, è una faticcaccia. Ah, per quanto riguarda anime/manga sto vedendo/leggendo Kiseijuu che devo dire è figo pur essendo un po' vecchio (non l'anime).</p>
-<p> </p>
-<p></body></html></p>
+Un "bad feeling" in realtà su come sta andando tutto ahah :)
+
+Comunque sono stato al Lucca Comics ed è stato tutto fiquo assai. Che dire, quest'anno è stato un vero casino. Sono andato il Sabato e non vi dico quanta gente c'era, cioè ho fatto fila solo per uscire dalle mura... USCIRE!!! Per non parlare di quella del treno per il ritorno AHAH (quella dell'andata è stata simpatica considerato che hanno cambiato il binario a Pisa e c'era marea di gente a corsa per prendere il treno LOL)
+
+Vabbè via... con IOIO sto aggeggiando ed ho intenzione di fare una miniatura di un Dalek... per ora mi sto organizzando con servomotori e ora parla anche!!
+
+Mi sono ordinato anche Teensy 2.0 e il 3.1 per fare un po' di test con l'USB e per fare una cosa simile alla Rubber Ducky :D
+
+Che dire ancora... mi sono cimentato nel progetto (in C++ ... incredibbbile) di un simulatore di Magic... ma non so per quanto ancora potrò continuarlo, è una faticcaccia. Ah, per quanto riguarda anime/manga sto vedendo/leggendo Kiseijuu che devo dire è figo pur essendo un po' vecchio (non l'anime).

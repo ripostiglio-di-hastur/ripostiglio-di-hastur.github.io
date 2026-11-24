@@ -5,17 +5,18 @@ description: Report del Lucca Comics 2014
 author: nex
 categories: [Blogging]
 tags: [casual, report]
-math: true
-mermaid: true
 image:
   path: /assets/2014/luccacomics.jpg
   alt: Nothing to see here...
 ---
-<html><body>
-<p>Beh in ritardo lo so, ma d'altronde con chi sto parlando se non con me stesso? Ahahahah...che risate...</p>
-<p>Comunque si sono stato al LC13, divertito assai come l'anno scorso, girato molto e visto tanta tanta roba... quest'anno il tempo non era malissimo anche se abbiamo incontrato a tratti un po' di pioggia :(<br />
-Posso dire di essere stato gran parte del tempo nel Games, e in questo modo sono riuscito a finire il mio mazzo Eldrazi &lt;3 :)</p>
-<p>Qui c'è un link per l'album di foto un po' scarno :( vedrò di ricare la foto :(</p>
-<p>Album su Google+ <em>(link non più disponibile)</em></p>
-<p>A breve, se ho voglia, parlerò di qualche progettino che ho in mente e se non ne ho già parlato di qualche progetto figo che non farò mai :)</p>
-<p></body></html></p>
+
+Beh in ritardo lo so, ma d'altronde con chi sto parlando se non con me stesso? Ahahahah...che risate...
+
+Comunque si sono stato al LC13, divertito assai come l'anno scorso, girato molto e visto tanta tanta roba... quest'anno il tempo non era malissimo anche se abbiamo incontrato a tratti un po' di pioggia :(  
+Posso dire di essere stato gran parte del tempo nel Games, e in questo modo sono riuscito a finire il mio mazzo Eldrazi \<3 :)
+
+Qui c'è un link per l'album di foto un po' scarno :( vedrò di ricare la foto :(
+
+Album su Google+ _(link non più disponibile)_
+
+A breve, se ho voglia, parlerò di qualche progettino che ho in mente e se non ne ho già parlato di qualche progetto figo che non farò mai :)
