@@ -5,6 +5,9 @@ author: nex
 date: 2011-10-31 15:59:24 +0100
 categories: [Personal]
 tags: [casual]
+image:
+  path: /assets/2011/10/IMG00133-20111030-1259.jpg
+  alt: Cosplay di Palpatine tra gli Stormtrooper
 permalink: "/2011/10/31/lucca-comics-and-games-2011/"
 ---
 

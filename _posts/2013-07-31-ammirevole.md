@@ -1,0 +1,31 @@
+---
+title: Ammirevole...
+date: 2013-07-31 20:23:03.000000000 +02:00
+description: Continuerò di scrivere su questo blog? Chissà.
+author: nex
+categories: [Blogging]
+tags: [casual]
+image:
+  path: /assets/2013/brainburst.jpg
+  alt: Accel World mi ha preso un po' troppo.
+---
+
+Ammirevole è l'aggettivo che utilizzerei se dovessi descrivere la mia perseveranza nello scrivere su questo blog...Ovviamente no, non sarebbe quello dato che sono anni che non scrivo (quasi).
+
+Comunque non c'è molto da dire, sono sempre qui a gozzovigliare su internet, a cercare scheletri nell'armadio, a rintracciare utenti perduti nel vortice della rete...
+
+(Ora starete pensando tra voi: "Ma che cazzo sta dicendo questo qui?")
+
+Ebbene è tutto vero, di recente stavo facendo ricerche sul passato dell'underground italiano per cercare se c'era qualche sopravvissuto...sono riuscito, partendo da Bfi e s0ftproj, a "risalire" all'Orda delle Badlands, fermandomi miseramente lì perchè non sono riuscito a trovare nient'altro :( Se qualcuno ha notizie, mi dica pura ;)
+
+Per passare oltre posso dirvi che sto imparando il Prolog, un linguaggio logico che secondo me è ottimo anche solo per cambiare punto di vista rispetto alla programmazione. Lo trovo bello nel suo diverso approccio al problema :D
+
+Ah, di recente sono diventato (o forse lo ero già) un assiduo nonsocosa di Anime...ne sto guardando tantissimi...e in particolare mi ha colpito Accel World. Un anime con una trama abbastanza semplice ma con i suoi dovuti colpi di scena, ma ovviamente ciò che mi ha colpito di più è l'ambientazione e l'idea che c'è dietro. Detto questo (dopo aver obbligato ognuno a guardarlo) pensavo, cioè ho partorito una delle mie cazzate, di creare un gioco in 3D proprio su questo anime.
+
+L'idea non è male e molte cose le ho già in mente, come per esempio che lo stile sarà un semi-openworld come DBZ: Budokai o come si chiama, e che si possa giocare in multiplayer online... L'idea c'è... ora basta trovare un 3D game engine adatta per questo lavoro, che funzioni a dovere, un modo per creare tutti i modelli 3D, e dato che il lavoro è molto di gente disposta a farlo ;)
+
+Tanto lo so come andrà a finire, idea lanciata direttamente nel dimenticatoio sotto la cartella cazzate impossibile (o idea geniale)...
+
+Vabbè vedremo...
+
+(Chissà, in futuro tornerò a leggere questo blog, e riderò di tutto ciò)

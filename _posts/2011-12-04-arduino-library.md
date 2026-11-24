@@ -5,12 +5,13 @@ author: nex
 date: 2011-12-04 18:28:06 +0100
 categories: [C, Programming]
 tags: [casual]
+image:
+  path: /assets/2011/12/sam_6289.jpg
+  alt: Primo piano di una scheda Arduino
 permalink: "/2011/12/04/arduino-library/"
 ---
 
 Hei, salve a tutti ;)
-
-[![Primo piano di una scheda Arduino](/assets/2011/12/sam_6289.jpg "Arduino")](https://ret2blog.files.wordpress.com/2011/12/sam_6289.jpg)
 
 Oggi *finalmente* mi è venuta la voglia di postare qualcosa di *serio* su Arduino ;)
 
@@ -22,7 +23,7 @@ La libreria è scritta interamente in C, e non presenta grandi difficoltà nella
 
 Un bug a me noto ma non ancora risolto è quello che ogni tanto sembra che Arduino non invii più dati sulla seriale, ciò rimane a me inspiegabile o.O basta un reset e tutto torna a funzionare. Altro problema è l'utilizzo di pinGet all'interno dei loop, che pare non funzionare correttamente probabilmente a causa dei dati e della velocità della seriale, vedrò di sistemare questo bug separando le linee di scambio dati tra input e output utilizzando le altre connessioni seriali dell'ArduinoMega ( ne ha in tutto 4 ).
 
-[![Scheda Roboduino Mega collegata a una breadboard con un LED](/assets/2011/12/sam_6287.jpg "Arduino Test")](https://ret2blog.files.wordpress.com/2011/12/sam_6287.jpg)
+![Scheda Roboduino Mega collegata a una breadboard con un LED](/assets/2011/12/sam_6287.jpg "Arduino Test")
 
 Qui a fianco l'esempio utilizzato con arduino-test.c
 
