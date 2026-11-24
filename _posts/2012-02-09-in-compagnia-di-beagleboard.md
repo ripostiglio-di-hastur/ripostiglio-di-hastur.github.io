@@ -5,12 +5,13 @@ author: nex
 date: 2012-02-09 18:22:12 +0100
 categories: [Personal]
 tags: [casual]
+image:
+  path: /assets/2012/02/sam_6369-30.jpg
+  alt: Scatola della BeagleBoard-xM
 permalink: "/2012/02/09/in-compagnia-di-beagleboard/"
 ---
 
 Beh, rieccoci qui proprio dopo Natale e proprio dopo aver ricevuto qualcosa....
-
-[![Scatola della BeagleBoard-xM](/assets/2012/02/sam_6369-30.jpg "Beagleboard Box")](https://ret2blog.files.wordpress.com/2012/02/sam_6369-30.jpg)
 
 Indovinate un po' cosa mi è arrivato? Beagleboard ... era scontato...
 
@@ -18,8 +19,8 @@ Comunque è un oggetto veramente figo, ho iniziato ad usarla proprio oggi e ho a
 
 A breve foto e video...
 
-[![BeagleBoard vista di lato](/assets/2012/02/sam_6366-30.jpg "Beagleboard")](https://ret2blog.files.wordpress.com/2012/02/sam_6366-30.jpg)
+![BeagleBoard vista di lato](/assets/2012/02/sam_6366-30.jpg "Beagleboard")
 
-[![Primo piano del circuito della BeagleBoard](/assets/2012/02/sam_6368-30.jpg "Beagleboard")](https://ret2blog.files.wordpress.com/2012/02/sam_6368-30.jpg)
+![Primo piano del circuito della BeagleBoard](/assets/2012/02/sam_6368-30.jpg "Beagleboard")
 
 {% include embed/youtube.html id='21IZYAiCLsQ' %}
